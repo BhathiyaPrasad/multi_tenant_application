@@ -1,103 +1,116 @@
+'use client'
 import Image from "next/image";
+import {Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from "@/components/ui/card";
+import {Button} from "@/components/ui/button";
+import {Avatar, AvatarImage, AvatarFallback} from "@/components/ui/avatar";
+import {Badge} from "@/components/ui/badge";
+import {useState} from "react";
+import BlogLoading from "@/app/ui-components/page";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const blogs = [
+    {
+        id: 1,
+        title: "Getting Started with Next.js and Shadcn",
+        description: "Learn how to set up a new project with Next.js and integrate Shadcn UI components.",
+        author: "Jane Doe",
+        date: "May 15, 2023",
+        readTime: "5 min read",
+        category: "Tutorial",
+        imageUrl: "/placeholder-blog-1.jpg"
+    },
+    {
+        id: 2,
+        title: "Building Accessible Web Applications",
+        description: "Best practices for creating web applications that everyone can use.",
+        author: "John Smith",
+        date: "June 2, 2023",
+        readTime: "8 min read",
+        category: "Accessibility",
+        imageUrl: "/placeholder-blog-2.jpg"
+    },
+    {
+        id: 3,
+        title: "Advanced TypeScript Patterns",
+        description: "Explore advanced TypeScript techniques for your Next.js projects.",
+        author: "Alex Johnson",
+        date: "June 10, 2023",
+        readTime: "12 min read",
+        category: "Development",
+        imageUrl: "/placeholder-blog-3.jpg"
+    },
+];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+export default function BlogPage() {
+    const [loading, setLoading] = useState(true);
+
+
+
+    setTimeout(() => {
+        setLoading(false);
+    }, 2000);
+
+    if (loading) return
+    <BlogLoading/>;
+
+
+    return (
+        <div className="container mx-auto px-4 py-12">
+            <header className="mb-12 text-center">
+                <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Our Blog</h1>
+                <p className="mt-4 text-lg text-muted-foreground">
+                    Insights, tutorials, and news from our team
+                </p>
+            </header>
+
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {blogs.map((blog) => (
+                    <Card key={blog.id} className="hover:shadow-lg transition-shadow duration-300">
+                        <CardHeader>
+                            <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
+                                <Image
+                                    src={blog.imageUrl}
+                                    alt={blog.title}
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                />
+                            </div>
+                        </CardHeader>
+                        <CardContent className="pt-4">
+                            <Badge variant="outline" className="mb-2">
+                                {blog.category}
+                            </Badge>
+                            <CardTitle className="mb-2 text-xl">{blog.title}</CardTitle>
+                            <CardDescription className="mb-4 line-clamp-2">
+                                {blog.description}
+                            </CardDescription>
+                            <div className="flex items-center gap-3">
+                                <Avatar className="h-8 w-8">
+                                    <AvatarImage src={`/avatars/${blog.author.toLowerCase().replace(' ', '-')}.jpg`}/>
+                                    <AvatarFallback>{blog.author.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <p className="text-sm font-medium">{blog.author}</p>
+                                    <p className="text-xs text-muted-foreground">
+                                        {blog.date} · {blog.readTime}
+                                    </p>
+                                </div>
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button variant="outline" className="w-full">
+                                Read More
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                ))}
+            </div>
+
+            <div className="mt-12 flex justify-center">
+                <Button variant="ghost">
+                    Load More Articles
+                </Button>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
