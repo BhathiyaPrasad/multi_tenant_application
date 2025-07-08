@@ -54,7 +54,7 @@ export function SignForm({ className, ...props }: React.ComponentProps<"div">) {
             })
 
             if (!response.ok) {
-                throw new Error('Registration failed')
+                throw new Error('User name already exists')
             }
 
             window.location.href = '/dashboard'
@@ -110,7 +110,7 @@ export function SignForm({ className, ...props }: React.ComponentProps<"div">) {
                     <CardHeader className="text-center">
                         <CardTitle className="text-xl">Choose your username</CardTitle>
                         <CardDescription>
-                            This will be used for your profile URL (e.g., blogger.com/{username || 'yourname'})
+                            This will be used for your profile URL <br/>(e.g., {username || 'yourname'}.blogger.com)
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
