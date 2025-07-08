@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import Image from "next/image";
 export default function Home() {
     return (
         <div className="min-h-screen flex flex-col">
@@ -29,7 +28,7 @@ export default function Home() {
                                 About
                             </Link>
                             <Button asChild variant="outline" className="rounded-full hover:bg-black hover:text-white">
-                                <Link href="/login">Sign In</Link>
+                                <Link href="/signin">Sign In</Link>
                             </Button>
                         </div>
                     </div>
