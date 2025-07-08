@@ -1,4 +1,3 @@
-import { GalleryVerticalEnd } from "lucide-react"
 
 import { SignForm } from "@/components/sign-form"
 
