@@ -1,30 +1,43 @@
 import {NextResponse, NextRequest} from "next/server";
 import prisma from '@/app/lib/prisma';
-import {getTenantSlugFromHeader} from "@/app/lib/tenant";
 import bcrypt from "bcrypt";
+
+
+function slugify(str: string): string {
+    return str
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)+/g, '')
+}
 
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const {email, password} = body;
+    const {email, password, username} = body;
     // adding server side validation
-    if (!email || !password || password.length < 6) {
-        return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
+    if (!email || !password || password.length < 6 || !username || username.length < 3) {
+        return NextResponse.json({error: 'Invalid input'}, {status: 400})
     }
 
     console.log(body)
-    // call the function in lb/tenant
-    const tenantSlug = await getTenantSlugFromHeader();
 
-    //search for tenant by slug
-    const tenant = await prisma.tenant.findUnique({where: {slug: tenantSlug}})
-        if (!tenant) return NextResponse.json({error: 'Tenant not found'}, {status: 404})
+    const tenantSlug = slugify(username);
+
+    let tenant = await prisma.tenant.findUnique({where: {slug: tenantSlug}})
+    if (!tenant) {
+         tenant = await prisma.tenant.create({
+            data: {
+                slug: tenantSlug,
+                name: username,
+            }
+        })
+    }
 
     // in case two users having same mail and different tenants
     const existing = await prisma.user.findFirst({
         where: {email, tenantId: tenant.id}
     })
-        if (existing) return NextResponse.json({error: 'User exists'}, {status: 409})
+    if (existing) return NextResponse.json({error: 'User exists'}, {status: 409})
 
     //  hash the password of the user
     const hashPassword = await bcrypt.hash(password, 10)
