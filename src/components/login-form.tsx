@@ -11,6 +11,7 @@ import {
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
 import React, {useState} from "react";
+import { Loader2 } from "lucide-react"
 
 export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
     const [email, setEmail] = useState('');
@@ -31,7 +32,8 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             });
 
             if (!response.ok) {
-                throw new Error('Invalid credentials');
+                const errorData = await response.json();
+                throw new Error(errorData.error);
             }
 
             window.location.href = '/dashboard';
@@ -81,8 +83,15 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
                                     <Input id="password" type="password" required value={password} onChange={e => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <Button type="submit" className="w-full">
-                                    Sign In
+                                <Button type="submit" className="w-full" disabled={isLoading}>
+                                    {isLoading ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Signing in...
+                                        </>
+                                    ) : (
+                                        "Sign In"
+                                    )}
                                 </Button>
                             </div>
 
@@ -90,6 +99,13 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
                     </form>
                 </CardContent>
             </Card>
+            {error && (
+                <Card className="border-destructive bg-destructive/10">
+                    <CardContent className="p-1 text-destructive text-sm text-center">
+                        {error}
+                    </CardContent>
+                </Card>
+            )}
 
             <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
