@@ -28,7 +28,7 @@ export default function Home() {
                             >
                                 About
                             </Link>
-                            <Button asChild variant="outline" className="rounded-full">
+                            <Button asChild variant="outline" className="rounded-full hover:bg-black hover:text-white">
                                 <Link href="/login">Sign In</Link>
                             </Button>
                         </div>
