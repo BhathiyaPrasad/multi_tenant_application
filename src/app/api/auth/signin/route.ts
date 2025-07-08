@@ -2,8 +2,6 @@ import {NextResponse , NextRequest} from "next/server";
 import prisma from "@/app/lib/prisma";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import {getTenantSlugFromHeader} from "@/app/lib/tenant";
-
 
 const JWT_SECRET = process.env.JWT_SECRET!
 
@@ -11,13 +9,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const {email , password} = body;
 
-    const tenantSlug = await getTenantSlugFromHeader();
-
-    const tenant = await prisma.tenant.findUnique({where: {slug: tenantSlug}});
-    if (!tenant){
-        return NextResponse.json({error: 'Tenant not found'}, {status: 404})
-    }
-    const user = await prisma.user.findFirst({where: {email, tenantId: tenant.id}});
+    const user = await prisma.user.findFirst({where: {email}});
     if (!user) {
         return NextResponse.json({error: 'User not found'}, {status: 404})
     }
@@ -39,5 +31,6 @@ export async function POST(req: NextRequest) {
         path: '/',
     })
     console.log(res)
+
     return res
 }
