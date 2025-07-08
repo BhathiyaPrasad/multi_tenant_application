@@ -32,17 +32,12 @@ export async function POST(req: NextRequest) {
             }
         })
     }
+    else {
+        return NextResponse.json({error: 'User name already exists'}, {status: 400})
+    }
 
-    // in case two users having same mail and different tenants
-    const existing = await prisma.user.findFirst({
-        where: {email, tenantId: tenant.id}
-    })
-    if (existing) return NextResponse.json({error: 'User exists'}, {status: 409})
-
-    //  hash the password of the user
     const hashPassword = await bcrypt.hash(password, 10)
 
-    // then save the user in to db
     console.log(hashPassword)
     const user = await prisma.user.create({
         data: {
