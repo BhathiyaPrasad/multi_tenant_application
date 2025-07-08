@@ -1,23 +1,20 @@
 'use client'
 import {cn} from "@/lib/utils"
 import {Button} from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
 import React, {useState} from "react";
 import { Loader2 } from "lucide-react"
+import {useRouter} from "next/navigation";
 
 export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const host = window.location.host;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -30,18 +27,21 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, password}),
             });
+            const responseData = await response.json();
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error);
+                throw new Error(responseData.error);
             }
-
-            window.location.href = '/dashboard';
+            console.log("response",responseData.tenantId)
+            const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+            const redirectUrl =  `${protocol}://${responseData.tenantId}.${host}`;
+            router.push(redirectUrl);
         } catch (err) {
             // @ts-ignore
             setError(err.message || 'Sign in failed. Please try again.');
         } finally {
             setIsLoading(false);
+
         }
     };
 

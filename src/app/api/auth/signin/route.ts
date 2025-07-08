@@ -14,6 +14,11 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({error: 'User not found'}, {status: 404})
     }
 
+    const tenant = await prisma.tenant.findUnique({where: {id: user.tenantId}});
+    if (!tenant) {
+        return NextResponse.json({error: 'Tenant not found'}, {status: 404})
+    }
+
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
         return NextResponse.json({error: 'Invalid password'}, {status: 401})
@@ -24,7 +29,7 @@ export async function POST(req: NextRequest) {
         { expiresIn: '7d' }
     )
 
-    const res = NextResponse.json({ message: 'Signed in' })
+    const res = NextResponse.json({ message: 'Signed in' , tenantId:tenant.slug  })
     res.cookies.set('token', token, {
         httpOnly: true,
         sameSite: 'lax',
