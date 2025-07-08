@@ -57,7 +57,7 @@ export default function Home() {
                                 About
                             </Link>
                             <Button asChild>
-                                <Link href="/api/auth/signin">Sign In</Link>
+                                <Link href="/signin">Sign In</Link>
                             </Button>
                         </div>
                     </div>
@@ -67,7 +67,7 @@ export default function Home() {
             <section className="bg-gray-50 dark:bg-gray-900 py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-                        Welcome to BlogApp
+                        Welcome to Blogger
                     </h1>
                     <p className="mt-6 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                         Discover insightful articles, tutorials, and news about web development and design.
