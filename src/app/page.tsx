@@ -38,17 +38,7 @@ export default function Home() {
 
             <section className="flex-1">
                 <div className="relative overflow-hidden">
-                    {/*<div className="absolute inset-0 -z-10 overflow-hidden">*/}
-                    {/*    <Image*/}
-                    {/*        src="/placeholder-blog-1.jpg"*/}
-                    {/*        alt="Blogger background"*/}
-                    {/*        fill*/}
-                    {/*        className="object-cover"*/}
-                    {/*        priority*/}
-                    {/*        quality={100}*/}
-                    {/*    />*/}
-                    {/*    <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />*/}
-                    {/*</div>*/}
+
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
                         <div className="relative z-10">
                             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
