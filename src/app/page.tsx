@@ -2,7 +2,19 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+
+
+
+
+
+
 export default function Home() {
+
+    const {signedIn} = {signedIn: false};
+
+
+
+
     return (
         <div className="min-h-screen flex flex-col">
             {/* Navigation Bar */}
@@ -28,7 +40,11 @@ export default function Home() {
                                 About
                             </Link>
                             <Button asChild variant="outline" className="rounded-full hover:bg-black hover:text-white">
+                                {signedIn ?
                                 <Link href="/signin">Sign In</Link>
+                                    :
+                                <Link href="/signup">Profile</Link>
+                                }
                             </Button>
                         </div>
                     </div>
