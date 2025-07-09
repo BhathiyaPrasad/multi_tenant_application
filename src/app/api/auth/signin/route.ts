@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     return res
 }
 
-export async function GET(req: NextRequest) {
+export async function PUT(req: NextRequest) {
     const body = await req.json();
     const {token} = body;
     const res = NextResponse.json({ message: 'Authenticated'  })
@@ -56,4 +56,5 @@ export async function GET(req: NextRequest) {
 
     });
     console.log("Authenticated Success")
+    return res;
 }

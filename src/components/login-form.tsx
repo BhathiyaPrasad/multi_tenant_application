@@ -42,15 +42,12 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
 
             const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
-            // if (currentHost === baseDomain || currentHost === `www.${baseDomain}`) {
                 window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/dashboard`;
-            // } else {
-            //     router.push('/dashboard');
-            // }
+
             console.log(responseData.token)
             const token = responseData.token;
             const authenticate = await fetch('/api/auth/signin', {
-                method: 'GET',
+                method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({token}),
             });
