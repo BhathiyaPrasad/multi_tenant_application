@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? '${tenant.slug}.bhathiya.me' : undefined,
+        domain: process.env.NODE_ENV === 'production' ? `${tenant.slug}.bhathiya.me` : undefined,
     });
 
 
