@@ -40,5 +40,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/((?!api|_next|favicon.ico).*)'],
+    matcher: ['/dashboard/:path*'], // This makes sure middleware runs on these routes
 }
