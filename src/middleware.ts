@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
 
     const response = NextResponse.next()
     response.headers.set('x-tenant', subdomain)
-
+    console.log(response)
     return response
 
 
