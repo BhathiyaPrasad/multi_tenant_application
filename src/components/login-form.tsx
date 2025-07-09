@@ -43,7 +43,7 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
             if (currentHost === baseDomain || currentHost === `www.${baseDomain}`) {
-                window.location.href = `${protocol}://${tenantSlug}.${baseDomain}`;
+                window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/dashboard`;
             } else {
                 router.push('/dashboard');
             }
