@@ -39,9 +39,17 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             }
             console.log("response",responseData.tenantId)
 
-            const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-            const redirectUrl =  `${protocol}://${responseData.tenantId}.${host}`;
-            router.push(redirectUrl);
+            // const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+            const baseDomain =  process.env.DOMAIN
+            if (host === baseDomain || host === `www.${baseDomain}`) {
+                // You're on root domain → redirect to tenant subdomain
+               router.push(`https://${responseData.tenantId}.${baseDomain}`);
+            } else {
+                // Already on subdomain → just reload or redirect to dashboard
+                router.push('/dashboard')
+            }
+            // const redirectUrl =  `${protocol}://${responseData.tenantId}.${host}`;
+            // router.push(redirectUrl);
         } catch (err) {
             // @ts-ignore
             setError(err.message || 'Sign in failed. Please try again.');
