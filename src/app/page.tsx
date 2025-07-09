@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -5,13 +8,23 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 
 
 
-
-
-
 export default function Home() {
 
-    const {signedIn} = {signedIn: false};
+    const [signedIn, setSignedIn] = useState(false);
 
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const response = await fetch('/api/auth/session-check');
+                const data = await response.json();
+                setSignedIn(data.signedIn);
+            } catch (error) {
+                console.error("Error checking session:", error);
+            }
+        };
+
+        checkSession().then(r => console.log("Session checked successfully"));
+    }, []);
 
 
 
