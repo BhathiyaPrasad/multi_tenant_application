@@ -35,8 +35,9 @@ export async function POST(req: NextRequest) {
         sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? 'process.env.DOMAIN' : undefined
-    })
+        domain: process.env.NODE_ENV === 'production' ? '.bhathiya.me' : undefined, // note the leading dot
+    });
+
 
     console.log("Log In Success")
 

@@ -34,22 +34,20 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             });
             const responseData = await response.json();
 
-            if (!response.ok) {
-                throw new Error(responseData.error);
-            }
             console.log("response",responseData.tenantId)
+            const tenantSlug = responseData.tenantId;
+            const currentHost = window.location.hostname
+            console.log("current host" , currentHost)
+            const baseDomain = process.env.NODE_ENV === 'production' ? 'bhathiya.me' :  'localhost'; // or process.env.DOMAIN in prod
 
-            // const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-            const baseDomain =  process.env.DOMAIN
-            if (host === baseDomain || host === `www.${baseDomain}`) {
-                // You're on root domain → redirect to tenant subdomain
-               router.push(`https://${responseData.tenantId}.${baseDomain}`);
+            const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+
+            if (currentHost === baseDomain || currentHost === `www.${baseDomain}`) {
+                window.location.href = `${protocol}://${tenantSlug}.${baseDomain}`;
             } else {
-                // Already on subdomain → just reload or redirect to dashboard
-                router.push('/dashboard')
+                router.push('/dashboard');
             }
-            // const redirectUrl =  `${protocol}://${responseData.tenantId}.${host}`;
-            // router.push(redirectUrl);
+
         } catch (err) {
             // @ts-ignore
             setError(err.message || 'Sign in failed. Please try again.');
