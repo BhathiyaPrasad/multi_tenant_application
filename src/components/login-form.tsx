@@ -38,15 +38,15 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             const tenantSlug = responseData.tenantId;
             const currentHost = window.location.hostname
             console.log("current host" , currentHost)
-            const baseDomain = process.env.NODE_ENV === 'production' ? 'bhathiya.me' :  'localhost'; // or process.env.DOMAIN in prod
+            const baseDomain = process.env.NODE_ENV === 'production' ? process.env.DOMAIN :  'localhost'; // or process.env.DOMAIN in prod
 
             const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
-            if (currentHost === baseDomain || currentHost === `www.${baseDomain}`) {
+            // if (currentHost === baseDomain || currentHost === `www.${baseDomain}`) {
                 window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/dashboard`;
-            } else {
-                router.push('/dashboard');
-            }
+            // } else {
+            //     router.push('/dashboard');
+            // }
 
         } catch (err) {
             // @ts-ignore
