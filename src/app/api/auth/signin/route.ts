@@ -34,7 +34,10 @@ export async function POST(req: NextRequest) {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
+        secure: process.env.NODE_ENV === 'production',
+        domain: process.env.NODE_ENV === 'production' ? 'process.env.DOMAIN' : undefined
     })
+
     console.log("Log In Success")
 
     return res

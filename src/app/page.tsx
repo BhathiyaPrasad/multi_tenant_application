@@ -43,7 +43,7 @@ export default function Home() {
                                 {signedIn ?
                                 <Link href="/signin">Sign In</Link>
                                     :
-                                <Link href="/signup">Profile</Link>
+                                <Link href="/dashboard">Dashboard</Link>
                                 }
                             </Button>
                         </div>
