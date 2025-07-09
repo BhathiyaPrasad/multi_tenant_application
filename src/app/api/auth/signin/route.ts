@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         sameSite: 'lax',
         path: '/',
     })
-    console.log(res)
+    console.log("Log In Success")
 
     return res
 }
