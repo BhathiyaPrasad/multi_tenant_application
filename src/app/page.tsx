@@ -41,9 +41,9 @@ export default function Home() {
                             </Link>
                             <Button asChild variant="outline" className="rounded-full hover:bg-black hover:text-white">
                                 {signedIn ?
-                                <Link href="/signin">Sign In</Link>
+                                    <Link href="/dashboard">Dashboard</Link>
                                     :
-                                <Link href="/dashboard">Dashboard</Link>
+                                    <Link href="/signin">Sign In</Link>
                                 }
                             </Button>
                         </div>
