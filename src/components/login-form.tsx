@@ -47,6 +47,15 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             // } else {
             //     router.push('/dashboard');
             // }
+            console.log(responseData.token)
+            const token = responseData.token;
+            const authenticate = await fetch('/api/auth/signin', {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({token}),
+            });
+            const authenticatedData = await authenticate.json()
+            console.log("Authenticated Data", authenticatedData);
 
         } catch (err) {
             // @ts-ignore
