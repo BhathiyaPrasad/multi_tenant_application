@@ -4,7 +4,7 @@ import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
-import React, {useState} from "react";
+import React, {useState , useEffect} from "react";
 import { Loader2 } from "lucide-react"
 import {useRouter} from "next/navigation";
 
@@ -14,8 +14,13 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const host = window.location.host;
+    const [host, setHost] = useState('');
 
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setHost(window.location.host);
+        }
+    }, []);
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
@@ -33,6 +38,7 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
                 throw new Error(responseData.error);
             }
             console.log("response",responseData.tenantId)
+
             const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
             const redirectUrl =  `${protocol}://${responseData.tenantId}.${host}`;
             router.push(redirectUrl);
