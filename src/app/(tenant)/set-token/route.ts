@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Inside app/(tenant)/set-token/route.ts
-// app/(tenant)/set-token/route.ts
-// app/(tenant)/set-token/route.ts
-// app/(tenant)/set-token/route.ts
 export async function GET(req: NextRequest) {
     try {
         const url = new URL(req.url);
