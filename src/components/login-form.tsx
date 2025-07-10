@@ -46,8 +46,8 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
 
             console.log(responseData.token)
             const token = responseData.token;
-            const authenticate = await fetch('/api/auth/signin', {
-                method: 'PUT',
+            const authenticate = await fetch('/api/auth/session-check', {
+                method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({token , tenantSlug}),
             });
