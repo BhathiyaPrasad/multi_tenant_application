@@ -46,6 +46,7 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
 
             console.log(responseData.token)
             const token = responseData.token;
+            console.log("Token", token ,'tenant', tenantSlug);
             window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/set-token?token=${encodeURIComponent(token)}`;
 
             // const authenticate = await fetch('/api/auth/session-check', {

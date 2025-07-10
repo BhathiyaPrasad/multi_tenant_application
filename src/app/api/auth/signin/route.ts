@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     const res = NextResponse.json({ message: 'Signed in' , tenantId:tenant.slug , token:token  })
 
-    console.log("Log In Success")
+    console.log("Log In Success" , tenant.slug , token);
 
     return res
 }
