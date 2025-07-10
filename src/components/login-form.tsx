@@ -49,10 +49,10 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             const authenticate = await fetch('/api/auth/signin', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({token}),
+                body: JSON.stringify({token , tenantSlug}),
             });
             const authenticatedData = await authenticate.json()
-            console.log("Authenticated Data", authenticatedData);
+            console.log("Authenticated Data", authenticatedData , tenantSlug);
 
         } catch (err) {
             // @ts-ignore

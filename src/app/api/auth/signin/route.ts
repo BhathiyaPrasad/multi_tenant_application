@@ -30,14 +30,6 @@ export async function POST(req: NextRequest) {
     )
 
     const res = NextResponse.json({ message: 'Signed in' , tenantId:tenant.slug , token:token  })
-    // res.cookies.set('token', token, {
-    //     httpOnly: true,
-    //     sameSite: 'lax',
-    //     path: '/',
-    //     secure: process.env.NODE_ENV === 'production',
-    //     domain: process.env.NODE_ENV === 'production' ? `${tenant.slug}.bhathiya.me` : undefined,
-    // });
-
 
     console.log("Log In Success")
 
@@ -46,13 +38,14 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
     const body = await req.json();
-    const {token} = body;
+    const {token , tenantSlug} = body;
     const res = NextResponse.json({ message: 'Authenticated'  })
     res.cookies.set('token', token, {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
+        domain: process.env.NODE_ENV === 'production' ? `${tenantSlug}.bhathiya.me` : 'localhost',
 
     });
     console.log("Authenticated Success")
