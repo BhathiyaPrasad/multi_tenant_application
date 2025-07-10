@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
@@ -9,15 +9,16 @@ export async function GET(req: NextRequest) {
     }
 
     const hostname = req.headers.get('host')!;
-    const currentSubdomain = hostname.split('.')[0];
+    const subdomain = hostname.split('.')[0];
 
     const res = NextResponse.redirect('/dashboard');
+
     res.cookies.set('token', token, {
         httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
         secure: process.env.NODE_ENV === 'production',
-        domain: process.env.NODE_ENV === 'production' ? `${currentSubdomain}.bhathiya.me` : 'localhost',
+        path: '/',
+        sameSite: 'lax',
+        domain: process.env.NODE_ENV === 'production' ? `${subdomain}.bhathiya.me` : 'localhost',
     });
 
     return res;
