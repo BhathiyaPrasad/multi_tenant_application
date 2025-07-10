@@ -29,6 +29,6 @@ export async function POST(req: NextRequest) {
         domain: process.env.NODE_ENV === 'production' ? `${tenantSlug}.bhathiya.me` : 'localhost',
 
     });
-    console.log("Authenticated Success")
+    console.log("Authenticated Success" , tenantSlug);
     return res;
 }
