@@ -1,32 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+// Inside app/(tenant)/set-token/route.ts
 export async function GET(req: NextRequest) {
     try {
-        const url = new URL(req.url)
-        const token = url.searchParams.get('token')
+        const url = new URL(req.url);
+        const token = url.searchParams.get('token');
 
         if (!token) {
-            return NextResponse.redirect('/signin') // you can fix this similarly too if needed
+            return NextResponse.redirect(`${url.protocol}//${url.host}/signin`);
         }
 
-        const hostname = req.headers.get('host') || ''
-        const subdomain = hostname.split('.')[0] || 'unknown'
-
-        const baseUrl = `${url.protocol}//${url.host}`
-
-        const res = NextResponse.redirect(`${baseUrl}/dashboard`)
+        const res = NextResponse.redirect(`${url.protocol}//${url.host}/dashboard`);
 
         res.cookies.set('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             path: '/',
             sameSite: 'lax',
-            // domain: `${subdomain}.bhathiya.me` // optional, be careful here
-        })
+        });
 
-        return res
-    } catch (err: any) {
-        console.error('set-token route error:', err.message || err)
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+        return res;
+    } catch (error: any) {
+        console.error("❌ /set-token error:", error.message || error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
+
