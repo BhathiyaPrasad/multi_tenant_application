@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname
     const token = request.cookies.get('token')?.value
 
-    // Protect dashboard
+    // ✅ Protect dashboard route
     if (pathname.startsWith('/dashboard')) {
         if (!token) return NextResponse.redirect(new URL('/signin', request.url))
         try {
@@ -21,8 +21,11 @@ export async function middleware(request: NextRequest) {
         }
     }
 
-    // ✅ Critical: rewrite all subdomain traffic to match (tenant) route group
-    if (subdomain !== 'www' && currentHost.endsWith('.bhathiya.me')) {
+    // ✅ Rewrite all subdomains — in dev & prod
+    const isLocalhost = currentHost === 'localhost'
+    const isSubdomain = !isLocalhost && currentHost.split('.').length > 2
+
+    if (isSubdomain || isLocalhost) {
         request.nextUrl.pathname = `/${request.nextUrl.pathname}`
         return NextResponse.rewrite(request.nextUrl)
     }
