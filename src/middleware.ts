@@ -11,7 +11,6 @@ export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname
     const token = request.cookies.get('token')?.value
 
-    // ✅ Protect dashboard route
     if (pathname.startsWith('/dashboard')) {
         if (!token) return NextResponse.redirect(new URL('/signin', request.url))
         try {
@@ -21,7 +20,6 @@ export async function middleware(request: NextRequest) {
         }
     }
 
-    // ✅ Rewrite all subdomains — in dev & prod
     const isLocalhost = currentHost === 'localhost'
     const isSubdomain = !isLocalhost && currentHost.split('.').length > 2
 

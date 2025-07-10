@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
             return NextResponse.redirect(new URL('/signin', url));
         }
 
-        const res = NextResponse.json({message:`${protocol}://${tenantId}${rootDomain}/dashboard`});
+        const res = NextResponse.redirect(new URL(`${protocol}://${tenantId}${rootDomain}/dashboard`));
         // const res = NextResponse.redirect(new URL(`http://${tenantId}.localhost:3000/dashboard`));
         res.cookies.set('token', token, {
             httpOnly: true,
