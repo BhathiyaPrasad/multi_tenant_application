@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
         const token = url.searchParams.get('token');
         const tenantId = url.searchParams.get('tenant');
         const isProduction = process.env.NODE_ENV === 'production';
-        const rootDomain = isProduction ? '.bhathiya.me' : undefined;
+        const rootDomain = isProduction ? 'bhathiya.me' : undefined;
 
         if (!token) {
             return NextResponse.redirect(new URL('/signin', url));
