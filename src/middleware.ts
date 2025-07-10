@@ -26,6 +26,11 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/signin', request.url))
         }
     }
+    if (subdomain !== 'www' && currentHost.endsWith('.bhathiya.me')) {
+        request.nextUrl.pathname = `/${request.nextUrl.pathname}`;
+        return NextResponse.rewrite(request.nextUrl);
+    }
+
 
     const response = NextResponse.next()
     response.headers.set('x-tenant', subdomain)
@@ -35,5 +40,5 @@ export async function middleware(request: NextRequest) {
 
 }
 export const config = {
-    matcher: ['/dashboard/:path*'],
+    matcher: ['/dashboard/:path*' , '/set-token'],
 }
