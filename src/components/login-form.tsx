@@ -46,15 +46,8 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
 
             console.log(responseData.token)
             const token = responseData.token;
-            const authenticate = await fetch('/api/auth/session-check', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({token , tenantSlug}),
-            });
-            const authenticatedData = await authenticate.json()
-            console.log("Authenticated Data", authenticatedData , tenantSlug);
+            window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/set-token?token=${encodeURIComponent(token)}`;
 
-            window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/dashboard`;
         } catch (err) {
             // @ts-ignore
             setError(err.message || 'Sign in failed. Please try again.');
