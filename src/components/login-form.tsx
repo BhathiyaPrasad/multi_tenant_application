@@ -47,7 +47,14 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             console.log(responseData.token)
             const token = responseData.token;
             console.log("Token", token ,'tenant', tenantSlug);
-            window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/set-token?token=${encodeURIComponent(token)}`;
+
+            const searchParams = new URLSearchParams({
+                token,
+                tenant: tenantSlug,
+            });
+
+
+            window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/set-token?${searchParams.toString()}`;
 
             // const authenticate = await fetch('/api/auth/session-check', {
             //     method: 'POST',

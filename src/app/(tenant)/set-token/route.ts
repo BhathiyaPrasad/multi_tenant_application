@@ -3,23 +3,27 @@ import { NextRequest, NextResponse } from 'next/server'
 // Inside app/(tenant)/set-token/route.ts
 // app/(tenant)/set-token/route.ts
 // app/(tenant)/set-token/route.ts
+// app/(tenant)/set-token/route.ts
 export async function GET(req: NextRequest) {
     try {
         const url = new URL(req.url);
         const token = url.searchParams.get('token');
+        const tenantId = url.searchParams.get('tenant');
+        const isProduction = process.env.NODE_ENV === 'production';
+        const rootDomain = isProduction ? '.bhathiya.me' : undefined;
 
         if (!token) {
             return NextResponse.redirect(new URL('/signin', url));
         }
 
-        // Create response with proper redirect
-        const res = NextResponse.json({ message: 'Signed in'})
-        // Set cookie for current subdomain only
+        const res = NextResponse.redirect(new URL(`https://${tenantId}.${rootDomain}/dashboard`));
+
         res.cookies.set('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: isProduction, // true in production
             path: '/',
-            sameSite: 'lax' // or 'none' if needed
+            sameSite: 'lax',
+            // domain: rootDomain // Important for production
         });
 
         return res;
