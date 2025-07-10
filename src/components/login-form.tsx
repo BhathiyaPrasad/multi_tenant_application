@@ -42,7 +42,7 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
 
             const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
-                window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/dashboard`;
+
 
             console.log(responseData.token)
             const token = responseData.token;
@@ -54,6 +54,7 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             const authenticatedData = await authenticate.json()
             console.log("Authenticated Data", authenticatedData , tenantSlug);
 
+            window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/dashboard`;
         } catch (err) {
             // @ts-ignore
             setError(err.message || 'Sign in failed. Please try again.');
