@@ -24,7 +24,10 @@ export async function middleware(request: NextRequest) {
     const isSubdomain = !isLocalhost && currentHost.split('.').length > 2
 
     if (isSubdomain || isLocalhost) {
-        request.nextUrl.pathname = `/${request.nextUrl.pathname}`
+        request.nextUrl.pathname = request.nextUrl.pathname.startsWith('/')
+            ? request.nextUrl.pathname
+            : `/${request.nextUrl.pathname}`;
+
         return NextResponse.rewrite(request.nextUrl)
     }
 

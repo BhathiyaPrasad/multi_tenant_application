@@ -50,7 +50,7 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
 
 
 
-            window.location.href = `${protocol}://${baseDomain}/set-token?token=${token}&tenant=${tenantSlug}`;
+            window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/set-token?token=${token}&tenant=${tenantSlug}`;
 
             // const authenticate = await fetch('/api/auth/session-check', {
             //     method: 'POST',

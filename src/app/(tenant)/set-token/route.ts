@@ -16,12 +16,10 @@ export async function GET(req: NextRequest) {
         const res = NextResponse.redirect(new URL(`${protocol}://${tenantId}${rootDomain}/dashboard`));
         // const res = NextResponse.redirect(new URL(`http://${tenantId}.localhost:3000/dashboard`));
         res.cookies.set('token', token, {
-            domain: `${tenantId}.bhathiya.me`,
             httpOnly: true,
             secure: isProduction, // true in production
             path: '/',
             sameSite: 'lax',
-            // domain: rootDomain // Important for production
         });
 
         return res;
