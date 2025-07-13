@@ -22,6 +22,9 @@ export async function middleware(request: NextRequest) {
 
     const isLocalhost = currentHost === 'localhost'
     const isSubdomain = !isLocalhost && currentHost.split('.').length > 2
+    const response = NextResponse.next()
+    response.headers.set('x-tenant', subdomain)
+    console.log("Middleware executed for subdomain:", subdomain)
 
     if (isSubdomain || isLocalhost) {
         request.nextUrl.pathname = request.nextUrl.pathname.startsWith('/')
@@ -31,11 +34,10 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(request.nextUrl)
     }
 
-    const response = NextResponse.next()
-    response.headers.set('x-tenant', subdomain)
+
     return response
 }
 
 export const config = {
-    matcher: ['/dashboard/:path*', '/set-token'],
+    matcher: ['/dashboard/:path*', '/set-token'  ,'/about' ,'/api/:path*'],
 }
