@@ -6,13 +6,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 
+
+type Blog = {
+    id: string
+    title: string
+    content: string
+    createdAt: string
+    type: string
+    Description: string
+}
+
+
+
 export function Navbar() {
     const [signedIn, setSignedIn] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState<Blog[]>([]);
     const [isSearching, setIsSearching] = useState(false);
     const [showResults, setShowResults] = useState(false);
-    const searchRef = useRef(null);
+    const searchRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const checkSession = async () => {
@@ -56,10 +68,9 @@ export function Navbar() {
         return () => clearTimeout(debounceTimer);
     }, [searchTerm]);
 
-    // Close search results when clicking outside
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (searchRef.current && !searchRef.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
                 setShowResults(false);
             }
         };
@@ -68,11 +79,7 @@ export function Navbar() {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    const clearSearch = () => {
-        setSearchTerm('');
-        setShowResults(false);
-        setBlogs([]);
-    };
+
 
     const handleSearchFocus = () => {
         if (searchTerm.trim()) {
