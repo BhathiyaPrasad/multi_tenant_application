@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     const tenantSlug = req.headers.get('x-tenant')
 
     if (!token || !tenantSlug) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+        return NextResponse.json([], { status: 401 })
     }
 
     try {
