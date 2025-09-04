@@ -38,7 +38,7 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             const tenantSlug = responseData.tenantId;
             const currentHost = window.location.hostname
             console.log("current host" , currentHost)
-            const baseDomain = process.env.NODE_ENV === 'production' ? 'bhathiya.me' :  'localhost'; // or process.env.DOMAIN in prod
+            const baseDomain = process.env.NODE_ENV === 'production' ? 'bhathiya.me' :  'localhost:3000'; // or process.env.DOMAIN in prod
 
             const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 
