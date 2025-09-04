@@ -15,7 +15,7 @@ export default function Page() {
    useEffect(() => {
     const getPrivateBlogs = async () => {
         try {
-            const response = await fetch('/api/blogs');
+            const response = await fetch('/api/blogs/tenant');
             const data = await response.json();
             setBlogs(data);
             console.log(data)
