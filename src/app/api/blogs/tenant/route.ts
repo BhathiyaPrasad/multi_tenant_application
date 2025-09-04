@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     if (!token || !tenantSlug) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-1
+
     try {
         const { payload } = await jwtVerify(token, JWT_SECRET)
         const userId = payload.userId
