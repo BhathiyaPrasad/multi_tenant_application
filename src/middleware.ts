@@ -22,9 +22,17 @@ export async function middleware(request: NextRequest) {
 
     const isLocalhost = currentHost === 'localhost'
     const isSubdomain = !isLocalhost && currentHost.split('.').length > 2
-    const response = NextResponse.next()
-    response.headers.set('x-tenant', subdomain)
-    console.log("Middleware executed for subdomain:", subdomain)
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.set("x-tenant", subdomain)
+
+    const response = NextResponse.next({
+        request: {
+            headers: requestHeaders,
+        },
+    })
+
+    response.headers.set("x-tenant", subdomain)
+
 
     if (isSubdomain || isLocalhost) {
         request.nextUrl.pathname = request.nextUrl.pathname.startsWith('/')
