@@ -23,7 +23,7 @@ export default function Page() {
             console.error("Error fetching blogs:", error);
         }
     };
-       getPrivateBlogs().then(r => console.log("Blogs fetched successfully"));
+       getPrivateBlogs().then(r => console.log("Blog Fetching End Point Called"));
 } , [])
 
 
