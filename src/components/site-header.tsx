@@ -115,7 +115,7 @@ export function SiteHeader() {
                                 </div>
 
                                 <Button type="submit" className="w-full">
-                                    Save Blog
+                                    Save
                                 </Button>
                             </form>
                         </DialogContent>
