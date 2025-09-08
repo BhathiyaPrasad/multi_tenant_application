@@ -47,7 +47,6 @@ export function SiteHeader() {
             setType("General")
             setOpen(false)
 
-            // You might also want to revalidate / refresh blogs list here
         } catch (err) {
             console.error(err)
         }
