@@ -86,7 +86,7 @@ export function SiteHeader() {
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="description">Description</Label>
+                                    <Label htmlFor="description" className="mb-1">Description</Label>
                                     <Input
                                         id="description"
                                         value={description}
@@ -95,7 +95,7 @@ export function SiteHeader() {
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="content">Content</Label>
+                                    <Label htmlFor="content" className="mb-1">Content</Label>
                                     <Textarea
                                         id="content"
                                         value={content}
@@ -105,7 +105,7 @@ export function SiteHeader() {
                                 </div>
 
                                 <div>
-                                    <Label htmlFor="type">Type</Label>
+                                    <Label htmlFor="type" className="mb-1">Type</Label>
                                     <Input
                                         id="type"
                                         value={type}
