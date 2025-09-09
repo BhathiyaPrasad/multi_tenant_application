@@ -47,8 +47,14 @@ export async function POST(req: NextRequest) {
     const tenantSlug = req.headers.get('x-tenant')
 
     if (!token || !tenantSlug) {
-        console.log("No Token or Tenant Slug" , "token",token , "tenantSlug", tenantSlug)
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+        return NextResponse.json( {
+                error: "Unauthorized",
+                reason: "No Token or Tenant Slug",
+                token: token ?? null,
+                tenantSlug: tenantSlug ?? null,
+            },
+            { status: 401 })
     }
 
     try {
