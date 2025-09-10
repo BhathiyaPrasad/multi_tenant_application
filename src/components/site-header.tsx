@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from "@/components/ui/sidebar"
+import {useState} from "react"
+import {Button} from "@/components/ui/button"
+import {Separator} from "@/components/ui/separator"
+import {SidebarTrigger} from "@/components/ui/sidebar"
 import {
     Dialog,
     DialogContent,
@@ -11,11 +11,11 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
+import {Input} from "@/components/ui/input"
+import {Textarea} from "@/components/ui/textarea"
+import {Label} from "@/components/ui/label"
 
-export function SiteHeader() {
+export function SiteHeader({onBlogCreated}: { onBlogCreated?: () => void }) {
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -28,7 +28,7 @@ export function SiteHeader() {
         try {
             const res = await fetch("/api/blogs/tenant", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
                     title,
                     Description: description,
@@ -46,16 +46,19 @@ export function SiteHeader() {
             setContent("")
             setType("General")
             setOpen(false)
-
+            if (onBlogCreated) {
+                onBlogCreated()
+            }
         } catch (err) {
             console.error(err)
         }
     }
 
     return (
-        <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
+        <header
+            className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
             <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
-                <SidebarTrigger className="-ml-1" />
+                <SidebarTrigger className="-ml-1"/>
                 <Separator
                     orientation="vertical"
                     className="mx-2 data-[orientation=vertical]:h-4"
