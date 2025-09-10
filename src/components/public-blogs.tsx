@@ -22,7 +22,7 @@ export function PublicBlogList({ blogs }: { blogs: Blog[] }) {
                     <CardHeader>
                         <Badge variant="outline" className="mb-2 w-fit capitalize">{blog.type}</Badge>
                         <CardTitle className="text-xl">{blog.title}</CardTitle>
-                        <CardDescription>{blog.Description}</CardDescription>
+                        <CardDescription className="line-clamp-4">{blog.Description}</CardDescription>
                     </CardHeader>
                     <CardFooter className="flex flex-col items-start gap-2 px-6 pb-6 text-sm text-muted-foreground">
                         <p className="line-clamp-3">{blog.content}</p>
