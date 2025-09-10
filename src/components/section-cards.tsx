@@ -68,6 +68,12 @@ export function SectionCards({blogs}: { blogs: Blog[] }) {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(updatedBlog),
             });
+            if (response.ok) {
+                alert("Blog updated successfully");
+                setEditingBlog(null);
+            } else {
+                alert("Failed to update blog");
+            }
         }
         catch (error) {
             console.error("Error updating blog:", error);
