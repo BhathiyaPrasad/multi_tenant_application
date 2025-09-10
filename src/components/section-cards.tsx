@@ -55,15 +55,15 @@ export function SectionCards({blogs}: { blogs: Blog[] }) {
     async function handleUpdate(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!editingBlog) return;
-        const formData = new FormData(e.currentTarget);
         const updatedBlog = {
-            title: formData.get("title") as string,
-            Description: formData.get("Description") as string,
-            content: formData.get("content") as string,
-            type: formData.get("type") as string,
+            title: editingBlog.title,
+            Description: editingBlog.Description,
+            content: editingBlog.content,
+            type: editingBlog.type,
         };
+        console.log(updatedBlog);
         try {
-            const response = await fetch(`/api/blogs/tenant/${editingBlog}`, {
+            const response = await fetch(`/api/blogs/tenant/${editingBlog.id}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(updatedBlog),
