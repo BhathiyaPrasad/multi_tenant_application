@@ -89,7 +89,7 @@ export function SectionCards({blogs}: { blogs: Blog[] }) {
                                 <IconTrendingUp className="size-4" />
                                 {blog.type}
                             </Badge>
-                            <CardDescription>{blog.Description}</CardDescription>
+                            <CardDescription className="line-clamp-1">{blog.Description}</CardDescription>
                             <CardTitle className="text-1xl font-semibold @[250px]/card:text-1xl">
                                 {blog.title}
                             </CardTitle>
@@ -100,7 +100,7 @@ export function SectionCards({blogs}: { blogs: Blog[] }) {
                             <div className="text-muted-foreground text-xs">
                                 Created: {new Date(blog.createdAt).toLocaleDateString()}
                             </div>
-                            <CardAction className="flex gap-2 ">
+                            <CardAction className="flex gap-2 mt-10 pl-35">
 
                                 <Button
                                     variant="ghost"
@@ -143,7 +143,7 @@ export function SectionCards({blogs}: { blogs: Blog[] }) {
 
                             <div className="grid gap-3">
                                 <Label htmlFor="description">Description</Label>
-                                <Input
+                                <Textarea
                                     id="description"
                                     value={editingBlog.Description}
                                     onChange={(e) =>
