@@ -93,7 +93,7 @@ export function SiteHeader({ onBlogCreated }: { onBlogCreated?: () => void }) {
 
                             <div className="grid gap-3">
                                 <Label htmlFor="description">Description</Label>
-                                <Input
+                                <Textarea
                                     id="description"
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
