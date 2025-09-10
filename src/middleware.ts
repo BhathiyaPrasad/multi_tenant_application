@@ -23,7 +23,6 @@ export async function middleware(request: NextRequest) {
     const isLocalhost = currentHost === 'localhost'
     const isSubdomain = !isLocalhost && currentHost.split('.').length > 2
 
-    //  forward x-tenant
     const requestHeaders = new Headers(request.headers)
     requestHeaders.set('x-tenant', subdomain)
 
