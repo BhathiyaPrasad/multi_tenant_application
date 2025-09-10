@@ -4,9 +4,12 @@ import prisma from '@/app/lib/prisma'
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!)
 
+type RouteContext = {
+    params: Promise<{ id: string }>
+}
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-    const  id  = params.id;
+export async function DELETE(req: NextRequest,  { params }: RouteContext) {
+    const { id } = await params;
     const token = req.cookies.get('token')?.value
     const tenantSlug = req.headers.get('x-tenant')
 
@@ -45,8 +48,9 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-    const id = params.id;
+export async function PUT(req: NextRequest, { params }: RouteContext) {
+    const { id } = await params;
+
     const token = req.cookies.get('token')?.value
     const tenantSlug = req.headers.get('x-tenant')
 
