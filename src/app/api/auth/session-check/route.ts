@@ -13,6 +13,7 @@ export async function GET(request: Request) {
         const {payload} = await jwtVerify(token, JWT_SECRET)
         return NextResponse.json(
             {
+                signedIn: true,
                 name: payload.name,
                 email: payload.email,
                 tenantId: payload.tenantId,
