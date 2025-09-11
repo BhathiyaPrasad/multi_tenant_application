@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({error: 'Invalid password'}, {status: 401})
     }
     const token = jwt.sign(
-        { userId: user.id, tenantId: user.tenantId },
+        { userId: user.id, tenantId: user.tenantId , email: user.email , name: tenant.name },
         JWT_SECRET,
         { expiresIn: '7d' }
     )
