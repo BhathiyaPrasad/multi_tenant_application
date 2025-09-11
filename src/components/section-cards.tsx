@@ -32,7 +32,13 @@ type Blog = {
     Description: string
 }
 
-export function SectionCards({blogs}: { blogs: Blog[] }) {
+type SectionCardsProps = {
+    blogs: Blog[];
+    onBlogUpdated?: () => void;
+};
+
+
+export function SectionCards({ blogs, onBlogUpdated }: SectionCardsProps) {
 
     const [editingBlog, setEditingBlog] = useState<Blog | null>(null)
 
@@ -42,13 +48,17 @@ export function SectionCards({blogs}: { blogs: Blog[] }) {
             const response = await fetch(`/api/blogs/tenant/${blogId}`,
                 {method: 'DELETE'});
             if (response.ok) {
-                alert("Blog deleted successfully");
+                console.log("Blog Deleted");
+                // alert("Blog deleted successfully");
             } else {
-                alert("Failed to delete blog");
+                console.log("Error while deleting this blog");
+                // alert("Failed to delete blog");
             }
         } catch (error) {
             console.error("Error deleting blog:", error);
-            alert("An error occurred while deleting the blog");
+            // alert("An error occurred while deleting the blog");
+        }finally {
+            onBlogUpdated?.()
         }
     }
 
@@ -69,15 +79,18 @@ export function SectionCards({blogs}: { blogs: Blog[] }) {
                 body: JSON.stringify(updatedBlog),
             });
             if (response.ok) {
-                alert("Blog updated successfully");
+                // alert("Blog updated successfully");
                 setEditingBlog(null);
             } else {
-                alert("Failed to update blog");
+                // alert("Failed to update blog");
+                console.error("Error deleting blog:");
             }
         }
         catch (error) {
             console.error("Error updating blog:", error);
-            alert("An error occurred while updating the blog");
+            // alert("An error occurred while updating the blog");
+        }finally {
+            onBlogUpdated?.()
         }
     }
 
