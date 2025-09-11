@@ -98,7 +98,17 @@ export function NavUser({
               {/*</DropdownMenuItem>*/}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+                onClick={async () => {
+                  try {
+                    await fetch("/api/auth/logout", { method: "POST" });
+
+                    window.location.href = "/";
+                  } catch (err) {
+                    console.error("Logout failed", err);
+                  }
+                }}
+            >
               <IconLogout />
               Log out
             </DropdownMenuItem>
