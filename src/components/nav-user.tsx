@@ -102,7 +102,6 @@ export function NavUser({
                 onClick={async () => {
                   try {
                     await fetch("/api/auth/logout", { method: "POST" });
-
                     window.location.href = "/";
                   } catch (err) {
                     console.error("Logout failed", err);
