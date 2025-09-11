@@ -110,10 +110,10 @@
 3. **Set up environment variables**  
    Copy `.env.example` to `.env` and configure your database and secrets.
 
-4. **Run database migrations & seed**
+4. **Run database migrations & seed(for development)**
    ```bash
    npx prisma migrate dev
-   npx tsx prisma/seeds.ts
+   npx tsx prisma/seeds.ts 
    ```
 
 5. **Run the development server**
@@ -130,7 +130,7 @@
 
 
 
-## Seed User Credentials
+## Seed User Credentials(For Development)
 
 - Tenant1
 
