@@ -29,8 +29,8 @@
 - **Create Tenant**: `src/app/create-tenant/page.tsx`  
   Users can register new tenants by entering a slug and name. On success, they're redirected to the signup page for their tenant subdomain.
 
-- **Get Tenant from Headers**: `src/app/lib/tenant.ts`  
-  Utility to extract the tenant slug from HTTP headers, ensuring all operations are contextually tenant-aware.
+- **Get Tenant from Urls**: `src/middleware.ts`  
+  Utility to extract the tenant slug from Request Url, ensuring all operations are contextually tenant-aware.
 
 - **Seed Data**: `prisma/seeds.ts`  
   Seeds initial tenants in the database for testing and demonstration.
