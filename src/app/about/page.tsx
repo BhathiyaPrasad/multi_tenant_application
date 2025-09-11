@@ -43,18 +43,6 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </section>
-
-                <section className="w-full py-12 bg-muted">
-                    <div className="max-w-3xl mx-auto px-4 text-center">
-                        <h2 className="text-3xl font-bold mb-4">Why Choose Blogger?</h2>
-                        <ul className="space-y-2 text-lg text-muted-foreground">
-                            <li>Simple and intuitive interface for both beginners and pros.</li>
-                            <li>Multi-tenancy keeps your content organized and private.</li>
-                            <li>Open-source tools and frameworks for easy customization.</li>
-                            <li>Responsive design for seamless experience on any device.</li>
-                        </ul>
-                    </div>
-                </section>
             </main>
         </div>
     );
