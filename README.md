@@ -128,4 +128,20 @@
 - For details on specific files or implementation, see the codebase or open the [About page](https://github.com/BhathiyaPrasad/multi_tenant_application/blob/main/src/app/about/page.tsx).
 - Contributions and feedback are welcome!
 
+
+
+## Seed User Credentials
+
+- Tenant1
+
+Email: admin@tenant1.com
+
+Password: password123
+
+- Tenant2
+
+Email: user@tenant2.com
+
+Password: password123
+
 ---
