@@ -43,7 +43,6 @@ export function SectionCards({ blogs, onBlogUpdated }: SectionCardsProps) {
     const [editingBlog, setEditingBlog] = useState<Blog | null>(null)
 
     async function handleDelete(blogId: string): Promise<void> {
-        if (!confirm("Are you sure you want to delete this blog?")) return;
         try {
             const response = await fetch(`/api/blogs/tenant/${blogId}`,
                 {method: 'DELETE'});
