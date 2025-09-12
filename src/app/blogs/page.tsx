@@ -1,6 +1,5 @@
 'use client'
 
-
 import {useEffect , useState} from "react";
 import { PublicBlogList } from "@/components/public-blogs";
 import {Navbar} from "@/components/navbar";
@@ -19,7 +18,9 @@ export default function BlogPage() {
         setBlogs(data);
         console.log(data);
       } catch (error) {
+        setBlogs([])
         console.error("Error checking session:", error);
+
       }
     };
 
