@@ -12,12 +12,7 @@ export async function GET() {
                 type: true,
                 Description: true,
                 createdAt: true,
-                tenant: {
-                    select: { id: true, name: true, slug: true },
-                },
-                Comment: {
-                    select: { id: true, content: true, createdAt: true },
-                },
+
             },
         })
 
