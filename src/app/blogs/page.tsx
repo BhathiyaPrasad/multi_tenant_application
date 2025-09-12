@@ -19,7 +19,7 @@ export default function BlogPage() {
         console.log(data);
       } catch (error) {
         setBlogs([])
-        console.error("Error checking session:", error);
+        console.error("Error checking Blogs:", error);
 
       }
     };
