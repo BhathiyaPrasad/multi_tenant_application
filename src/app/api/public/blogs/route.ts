@@ -11,7 +11,7 @@ export async function GET() {
     } catch (err) {
         console.error("Error fetching blogs:", err)
         return NextResponse.json(
-            { error: "Something went wrong" },
+            { error: "Something went wrong" , err },
             { status: 500 }
         )
     }
