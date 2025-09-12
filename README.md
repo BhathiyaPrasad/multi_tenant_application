@@ -110,10 +110,10 @@
 3. **Set up environment variables**  
    Copy `.env.example` to `.env` and configure your database and secrets.
 
-4. **Run database migrations & seed**
+4. **Run database migrations & seed(for development)**
    ```bash
    npx prisma migrate dev
-   npx tsx prisma/seeds.ts
+   npx tsx prisma/seeds.ts 
    ```
 
 5. **Run the development server**
@@ -127,5 +127,21 @@
 
 - For details on specific files or implementation, see the codebase or open the [About page](https://github.com/BhathiyaPrasad/multi_tenant_application/blob/main/src/app/about/page.tsx).
 - Contributions and feedback are welcome!
+
+
+
+## Seed User Credentials(For Development)
+
+- Tenant1
+
+Email: admin@tenant1.com
+
+Password: password123
+
+- Tenant2
+
+Email: user@tenant2.com
+
+Password: password123
 
 ---
