@@ -11,8 +11,8 @@ type Blog = {
 }
 
 export function PublicBlogList({ blogs }: { blogs: Blog[] }) {
-    if (!blogs || blogs.length === 0) {
-        return <p className="p-4 text-center text-muted-foreground">No blogs found.</p>
+    if (!Array.isArray(blogs) || blogs.length === 0) {
+        return <p>No blogs available.</p>;
     }
 
     return (
