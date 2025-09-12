@@ -34,6 +34,11 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             });
             const responseData = await response.json();
 
+            if (!response.ok) {
+                setError(responseData.error || 'Invalid email or password');
+                return;
+            }
+
             console.log("response",responseData.tenantId)
             const tenantSlug = responseData.tenantId;
             const currentHost = window.location.hostname
@@ -63,8 +68,8 @@ export function LoginForm({className, ...props}: React.ComponentProps<"div">) {
             //     window.location.href = `${protocol}://${tenantSlug}.${baseDomain}/dashboard`;
             // }
         } catch (err) {
-            // @ts-ignore
-            setError(err.message || 'Sign in failed. Please try again.');
+            console.error('Login error:', err);
+            setError('Something went wrong. Please try again.');
         } finally {
             setIsLoading(false);
 
