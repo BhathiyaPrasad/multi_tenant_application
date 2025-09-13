@@ -1,24 +1,44 @@
-# Technical Documentation
+# Multi-Tenant Application v0.2.0 🎉
 
 ## Overview
 
-**multi_tenant_application** is a lightweight, scalable foundation for building multi-tenant applications. It provides robust tenant isolation, dynamic routing, and customizable configurations per tenant, making it ideal for SaaS platforms, internal tools, or any system requiring secure and efficient multi-client architecture.
+**multi_tenant_application** is a comprehensive, full-featured multi-tenant platform with **complete CRUD functionality**. It provides robust tenant isolation, dynamic routing, content management, and secure authentication, making it ideal for SaaS platforms, content management systems, or any system requiring secure multi-client architecture with rich data operations.
 
+- **Version**: 0.2.0 - CRUD Functionality Complete
 - **Tech Stack**: Next.js, TypeScript, Prisma, PostgreSQL
 - **Homepage**: [bhathiya.me](https://bhathiya.me)
-- **Topics**: `multitenancy`, `nextjs`, `postgresql`
+- **Topics**: `multitenancy`, `nextjs`, `postgresql`, `crud`, `cms`
 
 ---
 
 ## Features
 
+### 🎯 Complete CRUD Operations (NEW in v0.2.0)
+- **CREATE**: Full blog creation with rich forms, validation, and tenant scoping
+- **READ**: Comprehensive blog listing with public APIs and tenant-specific views
+- **UPDATE**: In-place editing with modal dialogs and real-time updates
+- **DELETE**: Secure deletion with proper tenant validation and UI feedback
+
+### 🏢 Multi-Tenant Architecture  
 - **Multi-Tenancy**: Each tenant has isolated data and routes, typically accessed via subdomains (e.g., `tenant1.bhathiya.me`).
 - **Dynamic Tenant Creation**: Users can create their own tenant spaces via a simple form.
+- **Tenant Isolation**: Complete data separation and security between tenants.
+
+### 🔐 Security & Authentication
 - **Secure Authentication**: User signup and login are tenant-specific, with JWT-based authentication and token management.
+- **Token Management**: Secure cookie handling with HttpOnly cookies.
+- **API Security**: All CRUD endpoints protected with proper authentication and tenant validation.
+
+### 🎨 User Experience
 - **Customizable Dashboards**: Each tenant has a dedicated dashboard and content area.
+- **Interactive UI**: Blog cards with edit/delete actions, modal dialogs, and real-time updates.
+- **Responsive Design**: Mobile-first approach with modern, clean interfaces.
+
+### ⚡ Technical Excellence
 - **Robust Data Handling**: Uses Prisma ORM and PostgreSQL for scalable backend management.
-- **Content Management**: Tenants can create, read, update, and delete blog posts and comments.
+- **RESTful APIs**: Well-structured endpoints following REST principles.
 - **Clean Architecture**: Built for maintainability with modern full-stack technologies.
+- **Type Safety**: Full TypeScript implementation for better developer experience.
 
 ---
 
@@ -67,6 +87,39 @@
   Next.js routing structure enables per-tenant subdomain handling and route isolation.
 - **Prisma ORM**:  
   Data models for users, tenants, blogs, and comments are managed using Prisma and PostgreSQL.
+
+---
+
+## 🔌 CRUD API Endpoints (v0.2.0)
+
+### Blog Management APIs
+```
+POST   /api/blogs/tenant          # Create new blog post
+GET    /api/blogs/tenant          # List all tenant blogs
+PUT    /api/blogs/tenant/[id]     # Update specific blog post
+DELETE /api/blogs/tenant/[id]     # Delete specific blog post
+GET    /api/public/blogs          # Public blog access (cross-tenant)
+```
+
+### Tenant Management APIs  
+```
+POST   /api/tenant                # Create new tenant
+GET    /api/tenant                # Get tenant information
+```
+
+### Authentication APIs
+```
+POST   /api/auth/signup           # User registration (tenant-specific)
+POST   /api/auth/login            # User authentication
+GET    /set-token                 # Token management and redirect
+```
+
+**Security Features:**
+- All protected endpoints require valid JWT tokens
+- Tenant-scoped operations ensure data isolation  
+- Proper HTTP status codes and error handling
+- Input validation on all endpoints
+- CORS support for cross-origin requests
 
 ---
 
